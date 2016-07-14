@@ -1,0 +1,15 @@
+{
+    "name": "hoanghiep/auth-google",
+    "description": "dang nhap bang tai khoan google",
+    "require": {
+        "laravel/socialite": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hoang hiep",
+            "email": "thandonguocmo2020@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
