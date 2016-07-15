@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace   AuthGoogle;
 
 use Illuminate\Support\ServiceProvider;
+
+use Storage;
 
 class GoogleAuthProvider extends ServiceProvider
 {
@@ -13,10 +15,10 @@ class GoogleAuthProvider extends ServiceProvider
      */
     public function boot()
     {
-      $this->publishes([
-          __DIR__.("/config/services.php")=> config_path("/config/services.php"),
-          
-      ]);
+
+        if (! $this->app->routesAreCached()) {
+            require __DIR__.'/routes.php';
+        }
       
         $this->publishes([
           __DIR__.("/Auth/GoogleController.php")=> app_path("/Http/Controllers/Auth/GoogleController.php"),
@@ -31,6 +33,12 @@ class GoogleAuthProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfigFrom(
+            __DIR__.'/config/filesystems.php', 'filesystems.disks'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/config/services.php', 'services'
+        );
     }
 }
